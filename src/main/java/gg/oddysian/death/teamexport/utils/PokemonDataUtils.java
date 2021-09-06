@@ -84,7 +84,7 @@ public class PokemonDataUtils {
             }
             formattedString = formattedString  + "\n";
             formattedString = formattedString + "Ability: " + stats[3] + "\n";
-            formattedString = formattedString + "Level: " + stats[23] + "\n";
+            formattedString = formattedString + "Level: " + stats[22] + "\n";
             if (stats[4] != null){
                 if(stats[4].equals("yes"))
                     formattedString = formattedString + "Shiny: Yes" + "\n";
