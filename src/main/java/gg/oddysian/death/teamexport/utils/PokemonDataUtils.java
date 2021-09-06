@@ -80,7 +80,7 @@ public class PokemonDataUtils {
                 formattedString = formattedString + " ";
             }
             if(!stats[2].equals("Air")) {
-                formattedString = formattedString + "@ " + stats[2] + "\n";
+                formattedString = formattedString + "@ " + stats[2];
             }
             formattedString = formattedString  + "\n";
             formattedString = formattedString + "Ability: " + stats[3] + "\n";
