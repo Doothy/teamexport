@@ -10,8 +10,7 @@ public class PartyUtils {
     //I intend on expanding this util in the future, depending on when I need to do more party related stuff
     public static Pokemon[] getParty(UUID uuid){
         PlayerPartyStorage playerPartyStorage = Pixelmon.storageManager.getParty(uuid);
-        Pokemon[] party = playerPartyStorage.getAll();
-        return party;
+        return playerPartyStorage.getAll();
     }
 
 }

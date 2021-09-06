@@ -26,10 +26,10 @@ public class PokemonDataUtils {
             case "ivs_SPA": return "" + pkmn.getIVs().getStat(StatsType.SpecialAttack);
             case "ivs_SPD": return "" + pkmn.getIVs().getStat(StatsType.SpecialDefence);
             case "ivs_SPE": return "" + pkmn.getIVs().getStat(StatsType.Speed);
-            case "move1": return pkmn.getMoveset().attacks[0].getMove().getAttackName();
-            case "move2": return pkmn.getMoveset().attacks[1].getMove().getAttackName();
-            case "move3": return pkmn.getMoveset().attacks[2].getMove().getAttackName();
-            case "move4": return pkmn.getMoveset().attacks[3].getMove().getAttackName();
+            case "move1": if(pkmn.getMoveset().attacks[0] != null) return pkmn.getMoveset().attacks[0].getMove().getAttackName(); else return null;
+            case "move2": if(pkmn.getMoveset().attacks[1] != null) return pkmn.getMoveset().attacks[1].getMove().getAttackName(); else return null;
+            case "move3": if(pkmn.getMoveset().attacks[2] != null) return pkmn.getMoveset().attacks[2].getMove().getAttackName(); else return null;
+            case "move4": if(pkmn.getMoveset().attacks[3] != null) return pkmn.getMoveset().attacks[3].getMove().getAttackName(); else return null;
             default: return null;
         }
     }
@@ -37,7 +37,6 @@ public class PokemonDataUtils {
     public static String[] allStats(Pokemon pkmn){
         String[] allStatsAsString = new String[22];
         allStatsAsString[0] = getStat(pkmn, "name");
-        Teamexport.log.info("Trying to log the Pokemon name: " + allStatsAsString[0]);
         allStatsAsString[1] = getStat(pkmn, "gender");
         allStatsAsString[2] = getStat(pkmn, "item");
         allStatsAsString[3] = getStat(pkmn, "ability");
@@ -70,35 +69,55 @@ public class PokemonDataUtils {
             //General
             String formattedString = "";
             formattedString = formattedString + stats[0];
-            formattedString = formattedString + " (" + stats[1] + ") ";
-            formattedString = formattedString + "@ " + stats[2] + "\n";
+            if(stats[1].equals("Male")) {
+                formattedString = formattedString + " (M) ";
+            }
+            if(stats[1].equals("Female")) {
+                formattedString = formattedString + " (F) ";
+            }
+            if(stats[1].equals("None")) {
+                formattedString = formattedString + " ";
+            }
+            if(!stats[2].equals("air")) {
+                formattedString = formattedString + "@ " + stats[2] + "\n";
+            }
             formattedString = formattedString + "Ability: " + stats[3] + "\n";
-            if(stats[4] == "yes")
-                formattedString = formattedString + "Shiny: Yes" + "\n";
+            if (stats[4] != null){
+                if(stats[4].equals("yes"))
+                    formattedString = formattedString + "Shiny: Yes" + "\n";
+            }
             //EVs
             formattedString = formattedString + "EVs: ";
-            if(stats[5] != "0")
-                formattedString = formattedString + stats[5] + "HP / ";
-            if(stats[6] != "0")
-                formattedString = formattedString + stats[6] + "Atk / ";
-            if(stats[7] != "0")
-                formattedString = formattedString + stats[7] + "Def / ";
-            if(stats[8] != "0")
-                formattedString = formattedString + stats[8] + "SpA / ";
-            if(stats[9] != "0")
-                formattedString = formattedString + stats[9] + "SpD / ";
-            if(stats[10] != "0")
-                formattedString = formattedString + stats[10] + "Spe" + "\n";
+            if(!stats[5].equals("0"))
+                formattedString = formattedString + stats[5] + " HP / ";
+            if(!stats[6].equals("0"))
+                formattedString = formattedString + stats[6] + " Atk / ";
+            if(!stats[7].equals("0"))
+                formattedString = formattedString + stats[7] + " Def / ";
+            if(!stats[8].equals("0"))
+                formattedString = formattedString + stats[8] + " SpA / ";
+            if(!stats[9].equals("0"))
+                formattedString = formattedString + stats[9] + " SpD / ";
+            if(!stats[10].equals("0"))
+                formattedString = formattedString + stats[10] + " Spe";
+            formattedString = formattedString + "\n";
             formattedString = formattedString + stats[11] + " Nature" + "\n";
             //IVs
-            formattedString = formattedString + "IVs: " + stats[12] + "HP / " + stats[13] + "Atk / "
-            + stats[14] + "Def / " + stats[15] + "SpA / " + stats[16] + "SpD / " + stats[17] + "Spe" + "\n";
+            formattedString = formattedString + "IVs: " + stats[12] + " HP / " + stats[13] + " Atk / "
+            + stats[14] + " Def / " + stats[15] + " SpA / " + stats[16] + " SpD / " + stats[17] + " Spe" + "\n";
             //Moves
-            formattedString = formattedString + "- " + stats[18] + "\n";
-            formattedString = formattedString + "- " + stats[19] + "\n";
-            formattedString = formattedString + "- " + stats[20] + "\n";
-            formattedString = formattedString + "- " + stats[21] + "\n";
-
+            if(stats[18]!= null) {
+                formattedString = formattedString + "- " + stats[18] + "\n";
+            }
+            if(stats[19]!= null) {
+                formattedString = formattedString + "- " + stats[19] + "\n";
+            }
+            if(stats[20]!= null) {
+                formattedString = formattedString + "- " + stats[20] + "\n";
+            }
+            if(stats[21]!= null) {
+                formattedString = formattedString + "- " + stats[21] + "\n";
+            }
             Teamexport.log.info("Trying to log the formatted String: " + "\n" + formattedString);
             return formattedString;
         }

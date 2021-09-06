@@ -10,8 +10,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.UUID;
 
@@ -34,33 +32,38 @@ public class PlayerExportCommand extends CommandBase {
             if(PermissionUtils.canUse("teamexport.command.teamexport", sender)){
                 UUID uuid = player.getUniqueID();
                 Pokemon[] party = PartyUtils.getParty(uuid);
-                if (args.length == 0){
-                    player.sendMessage(new TextComponentString("\u00A7c" + "Please provide a valid argument! (all, <Slot>)"));
+                if (args.length != 1){
+                    player.sendMessage(new TextComponentString("\u00A7c" + "Please provide only one argument! (all; <Slot>)"));
                 }
-                else if (args[0] == "all") {
-                    String out = "";
-                    for (int i = 0; i < party.length; i++) {
-                        out = out + PokemonDataUtils.PokemonToFormattedString(PokemonDataUtils.allStats(party[i]));
-                        out = out + "\n";
+                else if (args[0].equals("all")) {
+                    StringBuilder out = new StringBuilder();
+                    for (Pokemon pokemon : party) {
+                        if(pokemon != null) {
+                            out.append(PokemonDataUtils.PokemonToFormattedString(PokemonDataUtils.allStats(pokemon)));
+                            out.append("\n");
+                        }
                     }
-                    Teamexport.log.info(out + "Test");
+                    Teamexport.log.info(out);
                 }
-                else if (args[0] == "1" || args[0] == "2" || args[0] == "3" || args[0] == "4" || args[0] == "5" || args[0] == "6"){
-                    String out = "";
-                    int i = 1;
-                    if(args[0] == "2") i = 2;
-                    if(args[0] == "3") i = 3;
-                    if(args[0] == "4") i = 4;
-                    if(args[0] == "5") i = 5;
-                    if(args[0] == "6") i = 6;
+                else if (args[0].equals("1") || args[0].equals("2") || args[0].equals("3")|| args[0].equals("4") || args[0].equals("5") || args[0].equals("6")){
+                    StringBuilder out = new StringBuilder();
+                    int i = 0;
+                    if(args[0].equals("2")) i = 1;
+                    if(args[0].equals("3")) i = 2;
+                    if(args[0].equals("4")) i = 3;
+                    if(args[0].equals("5")) i = 4;
+                    if(args[0].equals("6")) i = 5;
                     if (i <= party.length) {
                         if(party[i] != null) {
-                            out += PokemonDataUtils.PokemonToFormattedString(PokemonDataUtils.allStats(party[i]));
-                            Teamexport.log.info(out + "Test");
+                            out.append(PokemonDataUtils.PokemonToFormattedString(PokemonDataUtils.allStats(party[i])));
+                            Teamexport.log.info(out);
+                        }
+                        else{
+                            player.sendMessage(new TextComponentString("\u00A7c" + "This slot is empty :kekWait:"));
                         }
                     }
                 }
-                else {player.sendMessage(new TextComponentString("\u00A7c" + "Please provide a valid argument lmao! (all, <Slot>)"));}
+                else {player.sendMessage(new TextComponentString("\u00A7c" + "Please provide a valid argument! (all, <Slot>)"));}
             }
         }
     }
