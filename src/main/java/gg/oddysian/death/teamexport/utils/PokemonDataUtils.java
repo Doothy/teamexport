@@ -78,9 +78,10 @@ public class PokemonDataUtils {
             if(stats[1].equals("None")) {
                 formattedString = formattedString + " ";
             }
-            if(!stats[2].equals("air")) {
+            if(!stats[2].equals("Air")) {
                 formattedString = formattedString + "@ " + stats[2] + "\n";
             }
+            formattedString = formattedString  + "\n";
             formattedString = formattedString + "Ability: " + stats[3] + "\n";
             if (stats[4] != null){
                 if(stats[4].equals("yes"))
@@ -118,7 +119,6 @@ public class PokemonDataUtils {
             if(stats[21]!= null) {
                 formattedString = formattedString + "- " + stats[21] + "\n";
             }
-            Teamexport.log.info("Trying to log the formatted String: " + "\n" + formattedString);
             return formattedString;
         }
     }

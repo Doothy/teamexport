@@ -1,6 +1,7 @@
 package gg.oddysian.death.teamexport;
 
 import gg.oddysian.death.teamexport.commands.PlayerExportCommand;
+import gg.oddysian.death.teamexport.commands.StaffExportCommand;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -39,6 +40,7 @@ public class Teamexport {
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event){
         event.registerServerCommand(new PlayerExportCommand());
+        event.registerServerCommand(new StaffExportCommand());
     }
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
