@@ -30,12 +30,13 @@ public class PokemonDataUtils {
             case "move2": if(pkmn.getMoveset().attacks[1] != null) return pkmn.getMoveset().attacks[1].getMove().getAttackName(); else return null;
             case "move3": if(pkmn.getMoveset().attacks[2] != null) return pkmn.getMoveset().attacks[2].getMove().getAttackName(); else return null;
             case "move4": if(pkmn.getMoveset().attacks[3] != null) return pkmn.getMoveset().attacks[3].getMove().getAttackName(); else return null;
+            case "level": return "" + pkmn.getLevel();
             default: return null;
         }
     }
 
     public static String[] allStats(Pokemon pkmn){
-        String[] allStatsAsString = new String[22];
+        String[] allStatsAsString = new String[23];
         allStatsAsString[0] = getStat(pkmn, "name");
         allStatsAsString[1] = getStat(pkmn, "gender");
         allStatsAsString[2] = getStat(pkmn, "item");
@@ -58,12 +59,12 @@ public class PokemonDataUtils {
         allStatsAsString[19] = getStat(pkmn, "move2");
         allStatsAsString[20] = getStat(pkmn, "move3");
         allStatsAsString[21] = getStat(pkmn, "move4");
-
+        allStatsAsString[22] = getStat(pkmn, "level");
         return allStatsAsString;
     }
 
     public static String PokemonToFormattedString(String[]stats){
-        if (stats.length != 22)
+        if (stats.length != 23)
             return null;
         else {
             //General
@@ -83,6 +84,7 @@ public class PokemonDataUtils {
             }
             formattedString = formattedString  + "\n";
             formattedString = formattedString + "Ability: " + stats[3] + "\n";
+            formattedString = formattedString + "Level: " + stats[23] + "\n";
             if (stats[4] != null){
                 if(stats[4].equals("yes"))
                     formattedString = formattedString + "Shiny: Yes" + "\n";
